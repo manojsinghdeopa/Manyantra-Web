@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>ManYantra</title>
+	<meta charset="utf-8">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="HandheldFriendly" content="true" />
+	<script src="../script/popup.js"></script>
+	<link rel="stylesheet" href="../script/popup.css">
+	<meta name="mobile-web-app-capable" content="yes" />
+	<style type="text/css">
+		* {
+			padding: 0;
+			margin: 0;
+		}
+
+		html,
+		body {
+			overflow: hidden;
+			touch-action: none;
+			-ms-touch-action: none;
+		}
+
+		canvas {
+
+			touch-action: none;
+			-ms-touch-action: none;
+			width: 100% !important;
+			height: 100% !important;
+			margin-top: 0px !important;
+		}
+
+		@font-face {
+			font-family: 'impact';
+			font-style: normal;
+			font-weight: 400;
+			src: url(../font/impact.ttf) format('truetype');
+		}
+
+
+		/* Center the loader */
+		#loader {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			z-index: 1;
+			width: 50px;
+			height: 50px;
+			margin: -25px 0 0 -25px;
+			border: 3px solid #ffffff;
+			border-radius: 50%;
+			border-top: 3px solid #3498db;
+			-webkit-animation: spin 2s linear infinite;
+			animation: spin 2s linear infinite;
+		}
+
+		@-webkit-keyframes spin {
+			0% {
+				-webkit-transform: rotate(0deg);
+			}
+
+			100% {
+				-webkit-transform: rotate(360deg);
+			}
+		}
+
+		@keyframes spin {
+			0% {
+				transform: rotate(0deg);
+			}
+
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+	</style>
+	<script type="text/javascript" src="../script/phaser.min.js"></script>
+	<script type="text/javascript" src="../script/ads.js"></script>
+</head>
+
+<body>
+	<div id="loader"></div>
+	<div style="font-family:impact; position:absolute; left:-1000px; visibility:hidden;">.</div>
+	<script type="text/javascript" src="../script/main.js"></script>
+</body>
+
+</html>

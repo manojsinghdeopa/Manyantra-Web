@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <!-- Website Info  -->
+    <title>Articles</title>
+    <meta name="author" content="manyantra.com">
+    <meta name="description" content="Read, Write & Share Articles">
+    <meta name="keywords" content="read articles, write articles, share articles">
+    <!-- Website Sharable Link Info  -->
+    <meta property="og:title" content="Articles">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.manyantra.com/">
+    <meta property="og:image" content="https://www.manyantra.com/app_cover.png">
+    <meta property="og:description" content="Read, write & share">
+
+    <!-- Website Favicon Icon -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Website External CSS -->
+    <link rel="stylesheet" href="index.css">
+
+
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#445F87">
+    <link rel="apple-touch-icon" href="assets/app_logo.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+
+
+
+</head>
+
+<body>
+
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+
+    <!-- displaying spinner  -->
+
+    <div id="loadingSpinner" class="spinner-wrapper">
+        <div class="spinner-center"></div>
+    </div>
+
+
+    <!-- displaying contentlist -->
+    <div id="contentList"></div>
+
+
+
+    <!-- displaying lanuagelist -->
+    <div id="languageModal" style="display: none">
+        <div id="languageModalContent">
+            <h2>Select Language</h2>
+            <ul id="languageList"></ul>
+        </div>
+    </div>
+
+
+
+    <!--  Fab displaying -->
+    <div class="fab-container">
+        <div id="mainFab" class="main-fab" title="More">👆</div>
+
+        <div class="fab-menu hidden" id="fabMenu">
+            <div class="fab-item" id="languageFab" title="Language">🌍</div>
+            <div class="fab-item" id="playFab" title="Play">🎵</div>
+            <div class="fab-item" id="assistantFab" title="Assistant">🖊️</div>
+            <div class="fab-item" id="profileFab" title="Profile">✍️</div>
+        </div>
+
+    </div>
+
+
+
+    <audio id="radioPlayer" preload="none"></audio>
+
+    <script type="module" src="index.js" defer></script>
+
+</body>
+
+</html>

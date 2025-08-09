@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://www.manyantra.in/sitemap.xml
