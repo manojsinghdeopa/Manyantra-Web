@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: https://www.manyantra.in/sitemap.xml
+Sitemap: https://https://blackblock-14d67.web.app/sitemap.xml

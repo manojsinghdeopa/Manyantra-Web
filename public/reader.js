@@ -1,23 +1,24 @@
 import {
-    auth,
     analytics,
     db,
-    signInWithPopup,
-    GoogleAuthProvider,
     logEvent,
     collection,
     doc,
+    getDoc,
     setDoc,
     Timestamp,
     increment
 } from './firebase.js';
+
+import { translateText, translateTexts } from './translation-utils.js';
+
 
 
 const BOOKS_COLLECTION = 'books'
 
 class ArticleDetail {
 
-    
+
     constructor() {
         this.id = decodeURIComponent(new URLSearchParams(window.location.search).get('id'));
         this.action = decodeURIComponent(new URLSearchParams(window.location.search).get('action'));
@@ -40,34 +41,26 @@ class ArticleDetail {
         }
         this.updateActionButton();
     }
-    
+
+
+
 
     async translateContent(data) {
         try {
-            const response = await fetch(
-                `https://translation.googleapis.com/language/translate/v2?key=AIzaSyBkuxn-RDRAwrRKWbyl4Ef4m05aklyhSpA`,
-                {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        q: [data.title, data.text],  // Translate both title and text
-                        target: localStorage.getItem('selectedLanguage') || 'en',
-                    }),
-                }
-            );
-            const result = await response.json();
-    
-            // Update the book data with the translated title and text
-            // data.title = result.data.translations[0].translatedText;
-            data.text = result.data.translations[1].translatedText;
-    
+            const [translatedTitle, translatedText] = await translateTexts([
+                data.title,
+                data.text
+            ]);
+            data.title = translatedTitle;
+            data.text = translatedText;
         } catch (error) {
-            // console.error('Error translating content:', error);
+            console.error('Error translating content:', error);
         }
-    
-        return data; // Return the updated content object with translated title and text
+
+        return data;
     }
-    
+
+
 
     updateActionButton() {
         if (this.action == 'preview') {
@@ -114,24 +107,25 @@ class ArticleDetail {
 
 
     async fetchBookDetail() {
+        const bookRef = doc(db, BOOKS_COLLECTION, this.id);
         try {
-            const apiUrl = `https://us-central1-blackblock-14d67.cloudfunctions.net/getBookById?docId=` + this.id;
-            const response = await fetch(apiUrl);
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            this.data = await response.json();
+
+            const bookSnap = await getDoc(bookRef);
+            if (!bookSnap.exists()) throw new Error("Document not found");
+            this.data = bookSnap.data();
             this.showContent();
+
         } catch (error) {
             console.error("Error fetching data:", error);
-            // this.detailContainer.innerHTML = '<h4>Error loading content.</h4>';
-            this.detailContainer.innerHTML = '<h4>Error loading content. <a href="index">Go to Home Page</a></h4>';
+            this.detailContainer.innerHTML = `
+            <h4>Error loading content. <a href="index">Go to Home Page</a></h4>`;
         }
     }
 
 
+
     createCard(data) {
-        
+
         const image = this.createElementWithClass('img', 'book-image', {
             src: data.icon,
             alt: data.title,
@@ -166,7 +160,7 @@ class ArticleDetail {
 
 
     addCharacterLoadingEffect(element, text) {
-        const delay = 250; 
+        const delay = 250;
         let index = 0;
         const intervalId = setInterval(() => {
             if (index <= text.length) {
@@ -214,12 +208,13 @@ class ArticleDetail {
 
 
 
+
     publishArticle() {
         this.shareButton.textContent = 'Saving...';
         this.shareButton.disabled = true;
         this.addDocumentToBooksCollection();
-
     }
+
 
     async addDocumentToBooksCollection() {
         try {
@@ -235,7 +230,13 @@ class ArticleDetail {
                 in_review: true,
             });
 
-            window.location.replace('editor');
+            // Close the reader window and reload the editor page
+            if (window.opener) {
+                window.opener.location.reload();
+                window.close();
+            } else {
+                window.location.replace('editor');
+            }
 
         } catch (e) {
             this.shareButton.textContent = 'Try again';

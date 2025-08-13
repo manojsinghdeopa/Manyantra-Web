@@ -1,4 +1,6 @@
+
 import * as firebase from './firebase.js';
+import { translateText, translateTexts } from './translation-utils.js';
 
 
 const { auth, analytics, db, signInAnonymously, logEvent, collection, query, where, getDocs, startAfter, limit } = firebase;
@@ -158,7 +160,7 @@ function setupFloatingFab() {
 
 function promptCheck() {
     if (navigator.userAgent.toLowerCase().includes('instagram')) {
-        showCustomAlert("Please open www.manyantra.com in browser for better experience");
+        showCustomAlert("Please open https://blackblock-14d67.web.app in browser for better experience");
     } else {
         window.addEventListener('beforeinstallprompt', (e) => {
             // Prevent the mini-infobar from appearing on mobile
@@ -223,7 +225,7 @@ function showInstallPrompt() {
 
     installPrompt.innerHTML = `
         <div style="font-size: 1rem; margin-bottom: 0.5rem;">
-            Install Manyantra to your home screen for a best experience.
+            Install blackblock to your home screen for a best experience.
         </div>
         <div style="display: flex; gap: 0.5rem;">
             <button id="installAppBtn" style="padding: 0.5rem 1rem; background: #445F87; color: white; border: none; border-radius: 6px; cursor: pointer;">
@@ -299,14 +301,12 @@ async function loadContentTypes() {
     }
 }
 
+
 async function translateContentTypes(contentTypes) {
     try {
-        const translations = await Promise.all(contentTypes.map(async (contentType) => {
-            const translatedContentType = await translateText(contentType.originalName);
-            return translatedContentType;
-        }));
-
-        // After all translations are complete, assign them back to contentTypeList
+        // Use batch translation utility
+        const originals = contentTypes.map(ct => ct.originalName);
+        const translations = await translateTexts(originals);
         contentTypes.forEach((contentType, index) => {
             contentType.translatedName = translations[index];
         });
@@ -315,26 +315,7 @@ async function translateContentTypes(contentTypes) {
     }
 }
 
-async function translateText(text) {
-    try {
-        const response = await fetch(
-            `https://translation.googleapis.com/language/translate/v2?key=AIzaSyBkuxn-RDRAwrRKWbyl4Ef4m05aklyhSpA`,
-            {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    q: text,
-                    target: localStorage.getItem('selectedLanguage') || 'en',
-                }),
-            }
-        );
-        const data = await response.json();
-        return data.data.translations[0].translatedText;
-    } catch (error) {
-        // console.error('Error translating text:', error);
-        return text;  // Fallback to original text if translation fails
-    }
-}
+// Removed: replaced by translation-utils.js
 
 function displayContentTypes() {
     const fragment = document.createDocumentFragment();
@@ -377,25 +358,14 @@ function getNextQuery() {
     );
 }
 
+
 async function translateBook(book) {
     try {
-        const response = await fetch(
-            `https://translation.googleapis.com/language/translate/v2?key=AIzaSyBkuxn-RDRAwrRKWbyl4Ef4m05aklyhSpA`,
-            {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    q: [book.title],
-                    target: localStorage.getItem('selectedLanguage') || 'en',
-                }),
-            }
-        );
-        const data = await response.json();
-        book.title = data.data.translations[0].translatedText; // Update the book title
+        book.title = await translateText(book.title);
     } catch (error) {
         // console.error('Error translating book:', error);
     }
-    return book; // Return the updated book object
+    return book;
 }
 
 async function fetchBooks(q) {

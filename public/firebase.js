@@ -7,7 +7,7 @@ import { getAnalytics, logEvent } from 'https://www.gstatic.com/firebasejs/10.8.
 
 const firebaseConfig = {
     apiKey: "AIzaSyA2Pu9Z0f0WZr1hXp02mBD10NQwHCRt7uc",
-    authDomain: "auth.manyantra.com",
+    authDomain: "auth.blackblock",
     projectId: "blackblock-14d67",
     storageBucket: "blackblock-14d67.appspot.com",
     messagingSenderId: "813852879803",

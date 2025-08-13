@@ -1,0 +1,8 @@
+{
+  "name": "blackblock",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "firebase emulators:start --only hosting --config firebase.dev.json",
+    "deploy": "firebase deploy --only hosting"
+  }
+}

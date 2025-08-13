@@ -1,31 +1,12 @@
+
 import { getGenerativeModel, scrollToDocumentBottom, updateUI } from "./assistant-helper.js";
+import { translateText } from "./translation-utils.js";
 
 
 let formContainer, promptInput, historyElement, btnWrite;
 
 
-async function translateText(text) {
-    const selectedLanguage = localStorage.getItem("selectedLanguage") || "en";
-    const response = await fetch(
-        `https://translation.googleapis.com/language/translate/v2?key=AIzaSyBkuxn-RDRAwrRKWbyl4Ef4m05aklyhSpA`,
-        {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                q: text,
-                target: selectedLanguage,
-            }),
-        }
-    );
-
-    if (response.ok) {
-        const data = await response.json();
-        return data.data.translations[0].translatedText;
-    } else {
-        // console.error("Error translating text:", response.statusText);
-        return text; // Fallback to original text
-    }
-}
+// Use translateText from translation-utils.js
 
 
 
