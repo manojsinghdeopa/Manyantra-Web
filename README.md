@@ -1,6 +1,6 @@
 # 📰 Article Web App
 
-A **web application** for writing and viewing articles, built using **JavaScript, HTML, CSS**, with **Firebase backend** and **Gemini API integration**.  
+A **web application** for writing, viewing and sharing articles, built using **JavaScript, HTML, CSS**, with **Firebase backend** and **Gemini API integration**.  
 This project demonstrates a modern approach to creating lightweight, scalable, and interactive content apps.
 
 ---
