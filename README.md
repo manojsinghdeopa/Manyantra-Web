@@ -27,36 +27,29 @@ This project demonstrates a modern approach to creating lightweight, scalable, a
 
 ## ▶️ Getting Started
 
-1. Clone the repository:
    ```bash
+## Open the project in your code editor.
    git clone https://github.com/manojsinghdeopa/manyantra-web.git
-Open the project in your code editor.
 
 
-Set up Firebase:
-
-Create a Firebase project in the Firebase Console
-
-Enable Firestore Database and Authentication (if needed)
-
-Replace Firebase config in your firebase-config.js file
-
-Add your Gemini API key to the configuration file.
-
-Run the app locally with a live server (e.g., VS Code Live Server).
-
-Deploy with: firebase deploy
+## Set up Firebase:
+- Create a Firebase project in the Firebase Console
+- Enable Firestore Database and Authentication (if needed)
+- Replace Firebase config in your firebase-config.js file
+- Add your Gemini API key to the configuration file.
+- Run the app locally with a live server (e.g., VS Code Live Server).
+- Deploy with: firebase deploy
 
 
-📜 License
-This project is licensed under the MIT License.
-Feel free to use and adapt it for your own projects.
+## 📜 License
+- This project is licensed under the MIT License.
+- Feel free to use and adapt it for your own projects.
 
 
-🙌 Acknowledgements
+## 🙌 Acknowledgements
+- Firebase
+- Gemini API
+- Visual Studio Code
 
-Firebase
 
-Gemini API
 
-MDN Web Docs
