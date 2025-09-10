@@ -3,7 +3,7 @@
 A **web application** for writing, viewing and sharing articles, built using **JavaScript, HTML, CSS**, with **Firebase backend** and **Gemini API integration**.  
 This project demonstrates a modern approach to creating lightweight, scalable, and interactive content apps.
 
----
+
 
 ## 🚀 Features
 
@@ -14,7 +14,6 @@ This project demonstrates a modern approach to creating lightweight, scalable, a
 - ⚡ Real-time updates with Firebase  
 - 🌐 Deployed as a modern web app  
 
----
 
 ## 🏗 Tech Stack
 
@@ -23,7 +22,7 @@ This project demonstrates a modern approach to creating lightweight, scalable, a
 - **AI Integration:** Gemini API  
 - **Hosting:** Firebase Hosting or any static hosting provider  
 
----
+
 
 ## ▶️ Getting Started
 
