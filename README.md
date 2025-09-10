@@ -29,7 +29,7 @@ This project demonstrates a modern approach to creating lightweight, scalable, a
 
    ```bash
 ## Open the project in your code editor.
-   git clone https://github.com/manojsinghdeopa/manyantra-web.git
+   git clone https://github.com/manojsinghdeopa/Manyantra-Web.git
 
 
 ## Set up Firebase:
